@@ -1,14 +1,15 @@
 package com.javalin.currencyconverter;
 
+import com.javalin.currencyconverter.transaction.TransactionHandler;
 import io.javalin.Javalin;
-import io.javalin.apibuilder.EndpointGroup;
 
 public class Route {
 
-    public static EndpointGroup register(Javalin app) {
-        return () -> {
-            app.get("/", CurrencyHandler.hello);
-        };
+    public static void register(Javalin app) {
+        app.routes(() -> {
+            app.post("/", TransactionHandler.create)
+                .get("/health-check", ctx -> ctx.json("OK"));//BONUS!
+        });
     }
 
 }

@@ -13,8 +13,13 @@ repositories {
 
 dependencies {
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:3.7.7'
+    testCompile 'io.mockk:mockk:1.10.6'
     compile 'io.javalin:javalin:3.13.0'
     compile 'org.slf4j:slf4j-simple:1.7.30'
     compile 'org.mongodb:mongodb-driver:3.6.3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.10.3'
+    compile 'org.projectlombok:lombok:1.18.16'
+    compile 'org.apache.commons:commons-lang3:3.0'
+    compile 'commons-collections:commons-collections:3.2.2'
 }
