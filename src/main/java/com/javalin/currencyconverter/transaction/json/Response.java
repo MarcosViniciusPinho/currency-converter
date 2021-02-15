@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class Response {
     private String userId;
     private Coin coin;
     private Value value;
-    //TODO falta entender o que é a transação de conversão utilizada
+    private BigDecimal rate;
     private LocalDateTime date;
 
 }

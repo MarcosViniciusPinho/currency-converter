@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.math.BigDecimal;
 
 @AllArgsConstructor
-@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Value {
 
@@ -23,6 +21,14 @@ public class Value {
 
     public Value(BigDecimal orign) {
         this.orign = orign;
+    }
+
+    public BigDecimal getOrign() {
+        return orign;
+    }
+
+    public BigDecimal getTarget() {
+        return target;
     }
 
     @JsonIgnore

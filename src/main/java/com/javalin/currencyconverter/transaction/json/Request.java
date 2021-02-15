@@ -1,11 +1,11 @@
 package com.javalin.currencyconverter.transaction.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
-@Getter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
 
     @JsonProperty
@@ -23,6 +23,18 @@ public class Request {
         this.userId = userId;
         this.coin = coin;
         this.value = value;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public Coin getCoin() {
+        return coin;
+    }
+
+    public Value getValue() {
+        return value;
     }
 
     @JsonIgnore

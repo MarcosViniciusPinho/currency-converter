@@ -1,18 +1,29 @@
 package com.javalin.currencyconverter.transaction.service;
 
+import com.javalin.currencyconverter.transaction.entity.Transaction;
 import com.javalin.currencyconverter.transaction.exception.RequiredException;
 import com.javalin.currencyconverter.transaction.json.Request;
-import com.javalin.currencyconverter.transaction.json.Response;
+import com.javalin.currencyconverter.transaction.repository.TransactionRepository;
+import com.javalin.currencyconverter.transaction.repository.impl.TransactionRepositoryImpl;
 import io.javalin.core.validation.BodyValidator;
 import io.javalin.core.validation.Validator;
 
 public class TransactionService {
 
-    public Response send(Request request) {
-        return new Response();
+    private TransactionRepository repository;
+    private AdapterService service;
+
+    public TransactionService() {
+        this.repository = new TransactionRepositoryImpl();
+        this.service = new AdapterService();
     }
 
-    public Request validate(BodyValidator<Request> bodyValidator) {
+    public void create(BodyValidator<Request> bodyValidator) {
+        Request request = this.validate(bodyValidator);
+        this.repository.create(new Transaction(request, this.service.send(request.getCoin())));
+    }
+
+    private Request validate(BodyValidator<Request> bodyValidator) {
         Validator<Request> validator = bodyValidator.check(Request::hasUserId, "Field 'userId' is required")
                 .check(Request::hasCoin, "Required of 'coin' fields have not been filled")
                 .check(Request::hasValue, "Required of 'value' fields have not been filled");
