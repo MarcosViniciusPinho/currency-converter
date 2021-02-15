@@ -1,5 +1,6 @@
 package com.javalin.currencyconverter;
 
+import com.javalin.currencyconverter.config.PropertyConfig;
 import io.javalin.Javalin;
 
 public class CurrencyConverterInitializer {
@@ -7,7 +8,7 @@ public class CurrencyConverterInitializer {
     public static void main(String[] args) {
         Javalin app = Javalin.create(config -> {
             config.defaultContentType = "application/json";
-            config.contextPath = "/api";
+            config.contextPath = PropertyConfig.getValue("app.context-path");
             config.enableCorsForAllOrigins();
         });
         Route.register(app);

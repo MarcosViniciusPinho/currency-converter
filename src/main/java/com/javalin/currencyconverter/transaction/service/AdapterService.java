@@ -1,5 +1,6 @@
 package com.javalin.currencyconverter.transaction.service;
 
+import com.javalin.currencyconverter.config.PropertyConfig;
 import com.javalin.currencyconverter.transaction.exception.BadGatewayException;
 import com.javalin.currencyconverter.transaction.exception.CurrencyException;
 import com.javalin.currencyconverter.transaction.json.Coin;
@@ -18,8 +19,7 @@ public class AdapterService {
 
     public JSONObject send(Coin coin) {
         try {
-            //TODO definir como variavel de ambiente a uri('https://api.exchangeratesapi.io/latest?base=')
-            String uri = String.format("https://api.exchangeratesapi.io/latest?base=%s", coin.getOrign());
+            String uri = String.format(PropertyConfig.getValue("uri.exchange") + "?base=%s", coin.getOrign());
             HttpResponse<JsonNode> response = Unirest.get(uri).asJson();
 
             if(response.getStatus() >= 400) {
@@ -36,7 +36,7 @@ public class AdapterService {
             return rates;
         } catch (UnirestException e) {
             String error = "There was an error when trying to access the external API";
-            logger.log(Level.SEVERE, error);
+            logger.log(Level.SEVERE, error, e);
             throw new BadGatewayException(error, e);
         }
     }
