@@ -1,7 +1,5 @@
 package com.javalin.currencyconverter.transaction.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javalin.currencyconverter.transaction.json.Request;
 import org.bson.Document;
 import org.bson.types.Decimal128;
@@ -62,17 +60,14 @@ public class Transaction {
         return rate;
     }
 
-    @JsonIgnore
     public LocalDateTime getDate() {
         return date;
     }
 
-    @JsonProperty(value = "date")
     public String getDateAsString() {
         return DateTimeFormatter.ofPattern(PATTERN).format(this.date);
     }
 
-    @JsonProperty(value = "id")
     public String getIdAsString() {
         return this.id.toHexString();
     }

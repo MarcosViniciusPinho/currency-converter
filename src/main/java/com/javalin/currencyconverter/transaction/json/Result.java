@@ -31,8 +31,8 @@ public class Result {
     public Result(Transaction transaction) {
         this.id = transaction.getIdAsString();
         this.coin = new Coin(transaction.getCoin());
-        this.value = new Value(transaction.getValue());
         this.rate = transaction.getRate();
+        this.value = new Value(transaction.getValue(), this.rate);
         this.date = transaction.getDateAsString();
     }
 }

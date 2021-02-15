@@ -18,8 +18,15 @@ public class AdapterService {
 
     public JSONObject send(Coin coin) {
         try {
-            //TODO colocar o host em arquivo properties
-            HttpResponse<JsonNode> response = Unirest.get("https://api.exchangeratesapi.io/latest?base=USD").asJson();
+            //TODO definir como variavel de ambiente a uri('https://api.exchangeratesapi.io/latest?base=')
+            String uri = String.format("https://api.exchangeratesapi.io/latest?base=%s", coin.getOrign());
+            HttpResponse<JsonNode> response = Unirest.get(uri).asJson();
+
+            if(response.getStatus() >= 400) {
+                logger.log(Level.WARNING, (String) response.getBody().getObject().get("error"));
+                throw new CurrencyException(String.format("The reported currency does not exist(%s)", coin.getOrign()));
+            }
+
             JSONObject rates = response.getBody().getObject().getJSONObject("rates");
             if(!rates.has(coin.getTarget())) {
                 String error = String.format("The reported currency does not exist(%s)", coin.getTarget());
