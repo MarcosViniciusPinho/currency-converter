@@ -2,7 +2,6 @@ package com.javalin.currencyconverter.json;
 
 import com.javalin.currencyconverter.transaction.json.Coin;
 import com.javalin.currencyconverter.transaction.json.Request;
-import com.javalin.currencyconverter.transaction.json.Value;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ public class RequestTest {
 
     @Test
     public void test_must_return_true_when_mandatory_information_is_filled() {
-        Request request = new Request("tf6gduygds", new Coin("BRL", "EUR"), new Value(BigDecimal.valueOf(1230.50)));
+        Request request = new Request("tf6gduygds", BigDecimal.valueOf(1230.50), new Coin("BRL", "EUR"));
         Assert.assertTrue(request.hasUserId());
         Assert.assertTrue(request.hasCoin());
         Assert.assertTrue(request.hasValue());
@@ -20,15 +19,15 @@ public class RequestTest {
 
     @Test
     public void test_must_return_false_when_mandatory_information_is_not_filled() {
-        Request request = new Request(null, new Coin(), new Value());
+        Request request = new Request(null, null, new Coin());
         Assert.assertFalse(request.hasUserId());
         Assert.assertFalse(request.hasCoin());
         Assert.assertFalse(request.hasValue());
 
-        request = new Request(null, new Coin(null, "EUR"), null);
+        request = new Request(null, null, new Coin(null, "EUR"));
         Assert.assertFalse(request.hasCoin());
 
-        request = new Request(null, new Coin("BRL", null), null);
+        request = new Request(null, null, new Coin("BRL", null));
         Assert.assertFalse(request.hasCoin());
 
         request = new Request();

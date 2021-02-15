@@ -28,7 +28,7 @@ public class Transaction {
         this.id = new ObjectId();
         this.userId = request.getUserId();
         this.coin = new Coin(request.getCoin());
-        this.value = request.getValue().getOrign();
+        this.value = request.getValue();
         this.date = LocalDateTime.now(ZoneOffset.UTC);
         this.rate = BigDecimal.valueOf((Double) rates.get(request.getCoin().getTarget()));
     }

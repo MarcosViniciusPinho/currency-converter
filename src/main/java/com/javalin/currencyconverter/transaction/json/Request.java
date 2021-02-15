@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
 
@@ -15,11 +17,11 @@ public class Request {
     private Coin coin;
 
     @JsonProperty
-    private Value value;
+    private BigDecimal value;
 
     public Request() {}
 
-    public Request(String userId, Coin coin, Value value) {
+    public Request(String userId, BigDecimal value, Coin coin) {
         this.userId = userId;
         this.coin = coin;
         this.value = value;
@@ -33,7 +35,7 @@ public class Request {
         return coin;
     }
 
-    public Value getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
@@ -49,7 +51,7 @@ public class Request {
 
     @JsonIgnore
     public boolean hasValue() {
-        return this.value != null && this.value.hasOrign();
+        return this.value != null;
     }
 
 }
