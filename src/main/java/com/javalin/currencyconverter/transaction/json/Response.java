@@ -16,10 +16,10 @@ public class Response {
     private String userId;
 
     @JsonProperty
-    private List<Result> results;
+    private List<Result> transactions;
 
-    public Response(String id, List<Result> results) {
+    public Response(String id, List<Result> transactions) {
         this.userId = id;
-        this.results = results;
+        this.transactions = transactions;
     }
 }

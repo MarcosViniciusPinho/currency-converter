@@ -2,6 +2,7 @@ package com.javalin.currencyconverter.transaction.repository;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
 public class MongoDBCollection extends MongoDBFactory {
@@ -16,7 +17,7 @@ public class MongoDBCollection extends MongoDBFactory {
         this.collection.insertOne(document);
     }
 
-    public FindIterable<Document> findAll() {
-        return this.collection.find();
+    public FindIterable<Document> findByUserId(String userId) {
+        return this.collection.find(Filters.eq("userId", userId));
     }
 }

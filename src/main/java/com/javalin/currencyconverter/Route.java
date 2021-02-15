@@ -9,7 +9,7 @@ public class Route {
         app.routes(() -> {
             app.post("/", TransactionHandler.create)
                 .get("/health-check", ctx -> ctx.json("OK"))//BONUS!
-                .get("/", TransactionHandler.list);
+                .get("/", TransactionHandler.find);
         });
     }
 

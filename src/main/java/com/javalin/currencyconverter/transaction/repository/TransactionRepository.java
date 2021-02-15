@@ -7,6 +7,6 @@ import java.util.List;
 public interface TransactionRepository {
 
     void create(Transaction transaction);
-    List<Transaction> findAll();
+    List<Transaction> findByUserId(String userId);
 
 }

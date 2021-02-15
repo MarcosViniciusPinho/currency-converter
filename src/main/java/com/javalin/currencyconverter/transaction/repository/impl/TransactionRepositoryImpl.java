@@ -26,10 +26,10 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     }
 
     @Override
-    public List<Transaction> findAll() {
+    public List<Transaction> findByUserId(String userId) {
         //TODO caso sobre tempo trocar este mapeamento por anotações ou algo do gênero, para o código ficar mais legível
         List<Transaction> transactions = new ArrayList<>();
-        for(Document document : this.collection.findAll()) {
+        for(Document document : this.collection.findByUserId(userId)) {
             transactions.add(new Transaction(document));
         }
         return transactions;
