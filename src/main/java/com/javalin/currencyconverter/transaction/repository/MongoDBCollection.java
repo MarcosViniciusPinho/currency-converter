@@ -1,5 +1,6 @@
 package com.javalin.currencyconverter.transaction.repository;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
@@ -13,5 +14,9 @@ public class MongoDBCollection extends MongoDBFactory {
 
     public void save(Document document) {
         this.collection.insertOne(document);
+    }
+
+    public FindIterable<Document> findAll() {
+        return this.collection.find();
     }
 }

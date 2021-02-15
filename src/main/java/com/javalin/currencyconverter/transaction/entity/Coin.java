@@ -1,10 +1,7 @@
 package com.javalin.currencyconverter.transaction.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.bson.Document;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class Coin {
 
     private String orign;
@@ -13,6 +10,11 @@ public class Coin {
     public Coin(com.javalin.currencyconverter.transaction.json.Coin coin) {
         this.orign = coin.getOrign();
         this.target = coin.getTarget();
+    }
+
+    public Coin(Document document) {
+        this.orign = document.getString("orign");
+        this.target = document.getString("target");
     }
 
     public String getOrign() {

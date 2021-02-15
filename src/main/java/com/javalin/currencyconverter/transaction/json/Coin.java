@@ -16,6 +16,11 @@ public class Coin {
 
     public Coin() {}
 
+    public Coin(com.javalin.currencyconverter.transaction.entity.Coin coin) {
+        this.orign = coin.getOrign();
+        this.target = coin.getTarget();
+    }
+
     public Coin(String orign, String target) {
         this.orign = orign;
         this.target = target;

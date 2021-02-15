@@ -5,6 +5,9 @@ import com.javalin.currencyconverter.transaction.repository.MongoDBCollection;
 import com.javalin.currencyconverter.transaction.repository.TransactionRepository;
 import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TransactionRepositoryImpl implements TransactionRepository {
 
     private MongoDBCollection collection;
@@ -20,6 +23,16 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         this.collection.save(new Document("_id", transaction.getId()).append("userId", transaction.getUserId())
             .append("coin", coinDocument).append("value", transaction.getValue()).append("rate", transaction.getRate())
             .append("date", transaction.getDate().toString().concat("Z")));
+    }
+
+    @Override
+    public List<Transaction> findAll() {
+        //TODO caso sobre tempo trocar este mapeamento por anotações ou algo do gênero, para o código ficar mais legível
+        List<Transaction> transactions = new ArrayList<>();
+        for(Document document : this.collection.findAll()) {
+            transactions.add(new Transaction(document));
+        }
+        return transactions;
     }
 
 }

@@ -1,24 +1,25 @@
 package com.javalin.currencyconverter.transaction.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
 
-    private String id;
+    @JsonProperty
     private String userId;
-    private Coin coin;
-    private Value value;
-    private BigDecimal rate;
-    private LocalDateTime date;
 
+    @JsonProperty
+    private List<Result> results;
+
+    public Response(String id, List<Result> results) {
+        this.userId = id;
+        this.results = results;
+    }
 }

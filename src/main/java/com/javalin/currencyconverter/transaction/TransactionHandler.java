@@ -12,4 +12,9 @@ public class TransactionHandler {
         ctx.status(201);
     };
 
+    public static Handler list = ctx -> {
+        TransactionService service = new TransactionService();
+        ctx.json(service.getAll()).status(200);
+    };
+
 }
