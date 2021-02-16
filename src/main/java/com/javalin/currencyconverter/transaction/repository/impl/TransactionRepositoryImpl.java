@@ -22,7 +22,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         Document coinDocument = new Document("orign", transaction.getCoin().getOrign()).append("target", transaction.getCoin().getTarget());
         this.collection.save(new Document("_id", transaction.getId()).append("userId", transaction.getUserId())
             .append("coin", coinDocument).append("value", transaction.getValue()).append("rate", transaction.getRate())
-            .append("date", transaction.getDate().toString().concat("Z")));
+            .append("date", transaction.getDateAsString()));
     }
 
     @Override

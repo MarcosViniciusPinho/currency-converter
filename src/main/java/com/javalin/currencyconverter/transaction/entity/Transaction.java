@@ -1,6 +1,7 @@
 package com.javalin.currencyconverter.transaction.entity;
 
 import com.javalin.currencyconverter.transaction.json.Request;
+import com.javalin.currencyconverter.util.LocalDateTimeUtil;
 import org.bson.Document;
 import org.bson.types.Decimal128;
 import org.bson.types.ObjectId;
@@ -9,7 +10,6 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 
 public class Transaction {
 
@@ -19,8 +19,6 @@ public class Transaction {
     private BigDecimal value;
     private BigDecimal rate;
     private LocalDateTime date;
-
-    private static final String PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
     public Transaction(Request request, JSONObject rates) {
         this.id = new ObjectId();
@@ -36,7 +34,7 @@ public class Transaction {
         this.userId = document.getString("userId");
         this.coin = new Coin((Document)document.get("coin"));
         this.value = ((Decimal128) document.get("value")).bigDecimalValue();
-        this.date = LocalDateTime.parse(document.getString("date"), DateTimeFormatter.ofPattern(PATTERN));
+        this.date = LocalDateTimeUtil.toDate(document.getString("date"));
         this.rate = ((Decimal128) document.get("rate")).bigDecimalValue();
     }
 
@@ -65,7 +63,7 @@ public class Transaction {
     }
 
     public String getDateAsString() {
-        return DateTimeFormatter.ofPattern(PATTERN).format(this.date);
+        return LocalDateTimeUtil.toString(this.date);
     }
 
     public String getIdAsString() {
