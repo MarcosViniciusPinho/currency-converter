@@ -1,0 +1,22 @@
+task startdb() {
+    description "Start database docker container"
+
+    doLast {
+        exec {commandLine 'docker', 'run', '-d', '--name', 'mongo', '-p', '27017:27017', 'mongo:3.6'}
+        sleep(5 * 1000)
+        println 'Database container started'
+    }
+}
+
+task stopdb() {
+    description "Stop database docker container"
+
+    doLast {
+        try {
+            exec {commandLine 'docker', 'rm', '-f', 'mongo'}
+            println "Database container stopped"
+        } catch (Exception e) {
+            println "Failed to stop database container, try to run the task :startdb"
+        }
+    }
+}

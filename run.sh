@@ -1,0 +1,1 @@
+gradle clean build stopdb startdb && java -jar build/libs/Currency.jar
