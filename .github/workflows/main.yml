@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Login
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
       - uses: akhileshns/heroku-deploy@v3.11.10
         with:
