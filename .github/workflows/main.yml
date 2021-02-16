@@ -17,4 +17,4 @@ jobs:
       - name: Deploy
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:login && git push heroku master
+        run: heroku container:login && heroku git:remote -a currency-converters && git push heroku master
