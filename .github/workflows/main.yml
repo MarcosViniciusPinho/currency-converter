@@ -23,8 +23,8 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "currency-converters"
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          usedocker: true
+#        with:
+#          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#          heroku_app_name: "currency-converters"
+#          heroku_email: ${{secrets.HEROKU_EMAIL}}
+#          usedocker: true
