@@ -9,13 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
         uses: actions/checkout@v2
-      - name: Build, Push and Deploy to Heroku
-        id: heroku
+      - name: Checkout
         uses: jctaveras/heroku-deploy@v1.0.0
       - name: Login to Heroku Container registry
-        run: heroku container:login
         with:
           api_key: ${{secrets.HEROKU_API_KEY}}
           app_name: "currency-converters"
