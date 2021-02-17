@@ -14,10 +14,28 @@ jobs:
         with:
           repository: ${{ secrets.HEROKU_REPO_GITHUB }}
           ref: "main"
-      - name: Deploy heroku
-        uses: akhileshns/heroku-deploy@v3.11.10
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          usedocker: true
+
+      - name: "Create .netrc for Heroku Auth"
+        shell: bash
+        run: |
+          `cat >~/.netrc <<EOF
+          machine api.heroku.com
+              login $EMAIL
+              password $HEROKU_AUTH_TOKEN
+          machine git.heroku.com
+              login $EMAIL
+              password $HEROKU_AUTH_TOKEN
+          EOF`
+        env:
+          EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
+
+      - name: "Add remote"
+        shell: "bash"
+        run: |
+          heroku git:remote --app currency-converters
+
+      - name: "Push to heroku"
+        shell: "bash"
+        run: |
+          git push heroku HEAD:master
