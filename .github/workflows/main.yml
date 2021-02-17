@@ -28,7 +28,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gradle:${GITHUB_ACTION}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gradle:${{ env.GITHUB_ACTION }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
