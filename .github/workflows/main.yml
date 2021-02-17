@@ -37,3 +37,13 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
+
+      - name: "Add remote"
+        shell: "bash"
+        run: |
+          heroku git:remote --app aleem-urls
+
+      - name: "Push to heroku"
+        shell: "bash"
+        run: |
+          git push heroku HEAD:master
