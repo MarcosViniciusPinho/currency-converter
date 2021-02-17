@@ -40,8 +40,8 @@ jobs:
 
       - name: Deploy heroku
         uses: akhileshns/heroku-deploy@v3.11.10
-          with:
-            heroku_api_key: ${{secrets.HEROKU_AUTH_TOKEN}}
-            heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-            heroku_email: ${{secrets.HEROKU_EMAIL}}
-            usedocker: true
+        with:
+          heroku_api_key: ${{secrets.HEROKU_AUTH_TOKEN}}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          usedocker: true
