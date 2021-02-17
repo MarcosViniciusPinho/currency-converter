@@ -33,7 +33,7 @@ jobs:
       - name: "Add remote"
         shell: "bash"
         run: |
-          heroku git:remote --app currency-converters
+          heroku git:remote -a currency-converters
 
       - name: "Push to heroku"
         shell: "bash"
