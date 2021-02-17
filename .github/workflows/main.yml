@@ -41,7 +41,7 @@ jobs:
       - name: "Add remote"
         shell: "bash"
         run: |
-          heroku git:remote --app aleem-urls
+          heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
 
       - name: "Push to heroku"
         shell: "bash"
