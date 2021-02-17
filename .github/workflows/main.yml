@@ -38,12 +38,10 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
 
-      - name: "Add remote"
-        shell: "bash"
-        run: |
-          heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
-
-      - name: "Push to heroku"
-        shell: "bash"
-        run: |
-          git push heroku HEAD:master
+      - name: Deploy heroku
+        uses: akhileshns/heroku-deploy@v3.11.10
+          with:
+            heroku_api_key: ${{secrets.HEROKU_AUTH_TOKEN}}
+            heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+            heroku_email: ${{secrets.HEROKU_EMAIL}}
+            usedocker: true
