@@ -20,7 +20,7 @@ jobs:
         with:
           email: marcosjava2008@gmail.com
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_app_name: currency-converters
           dockerfile_name: Dockerfile
           docker_options: "--no-cache"
           dockerfile_directory: ./
