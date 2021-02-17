@@ -32,7 +32,8 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: gradle:6.8.2-jdk8
+          tags: ushamandya/simplewhale:latest
+
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
