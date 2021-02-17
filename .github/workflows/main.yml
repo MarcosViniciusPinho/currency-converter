@@ -21,7 +21,7 @@ jobs:
       - name: Prepare build docker
         run: gradle clean build
 
-      - name: Build and push
+      - name: Build docker
         id: docker_build
         uses: docker/build-push-action@v2
         with:
@@ -30,6 +30,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gradle:1.0
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Login to Heroku Container registry
