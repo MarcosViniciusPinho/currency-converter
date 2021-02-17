@@ -1,1 +1,1 @@
-java -jar build/libs/Currency.jar
+java -jar Currency.jar
