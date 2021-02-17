@@ -1,4 +1,4 @@
-name: CI to Docker Hub
+name: Deploy to heroku
 
 on:
   push:
@@ -11,36 +11,16 @@ jobs:
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
+
+      - name: Prepare to build
+        run: gradle clean build
+
+      - name: Build, Push and Release a Docker container to Heroku.
+        uses: gonuit/heroku-docker-deploy@v1.1.0
         with:
-          repository: ${{ secrets.HEROKU_REPO_GITHUB }}
-          ref: "main"
-
-      - name: Login to Heroku Container registry
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:login
-
-      - name: "Create .netrc for Heroku Auth"
-        shell: bash
-        run: |
-          `cat >~/.netrc <<EOF
-          machine api.heroku.com
-              login $EMAIL
-              password $HEROKU_AUTH_TOKEN
-          machine git.heroku.com
-              login $EMAIL
-              password $HEROKU_AUTH_TOKEN
-          EOF`
-        env:
-          EMAIL: ${{ secrets.HEROKU_EMAIL }}
-          HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
-
-      - name: "Add remote"
-        shell: "bash"
-        run: |
-          heroku git:remote -a currency-converters
-
-      - name: "Push to heroku"
-        shell: "bash"
-        run: |
-          git push heroku main
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          dockerfile_name: Dockerfile
+          docker_options: "--no-cache"
+          dockerfile_directory: ./
