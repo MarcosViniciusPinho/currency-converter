@@ -1,1 +1,1 @@
-java -jar Currency.jar
+java -jar /opt/currency/Currency.jar
